@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoiceBridge — Real-Time Voice Translation</title>
+    <meta name="description" content="Real time voice translation.">
+    <meta name="author" content="VoiceBridge" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://yourapp.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@VoiceBridge" />
+    <meta name="twitter:image" content="https://yourapp.com/og-image.png" />
+    <meta property="og:title" content="VoiceBridge App">
+    <meta name="twitter:title" content="VoiceBridge App">
+    <meta property="og:description" content="Real time voice translation.">
+    <meta name="twitter:description" content="Real time voice translation.">
+
+    <!-- Google Fonts (Best Practice) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <script>
+      // Prevent flash of wrong theme
+      (function(){
+        var t = localStorage.getItem('theme');
+        if(t==='dark' || (!t && window.matchMedia('(prefers-color-scheme:dark)').matches)){
+          document.documentElement.classList.add('dark')
+        }
+      })();
+    </script>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
