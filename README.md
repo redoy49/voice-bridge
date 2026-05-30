@@ -1,56 +1,82 @@
-# VoiceBridge AI
+# VoiceBridge AI: Real-Time Multilingual Communication
 
-VoiceBridge is a modern web application designed for real time voice translation. It enables users to speak in one language and have their words translated instantly into another language. This project leverages AI to provide ultra low latency translation for meetings, calls, and live events.
+VoiceBridge is a high-performance, real-time voice translation platform designed to bridge language gaps. Built with modern AI and streaming technologies, it provides low-latency speech-to-speech translation with a focus on natural conversational flow and accuracy.
 
-## Features
+Live Demo: [voicebridge.web.app](https://voicebridge.web.app/)
 
-* Real time voice to text translation
-* Support for multiple languages
-* Ultra low latency streaming
-* Built in pricing and subscription management
-* Secure authentication and user registration
+## Core Features
+
+- Real-Time Speech Recognition: Converts spoken language to text instantly using the Web Speech API.
+- AI-Powered Translation: Leverages Gemini 1.5 models via Supabase Edge Functions for context-aware, high-accuracy translations.
+- Low-Latency Streaming: Utilizes Server-Sent Events (SSE) to deliver translation updates in real-time.
+- Natural Text-to-Speech: Synthesizes translated text into natural-sounding audio for seamless interaction.
+- Automatic Language Detection: Intelligently identifies source languages to streamline the user experience.
+- Secure Authentication: Full user lifecycle management integrated with Supabase Auth.
+- Responsive Design: Fully optimized for desktop, tablet, and mobile environments.
 
 ## Tech Stack
 
-* Vite for build tool
-* React for frontend library
-* TypeScript for type safety
-* Tailwind CSS for styling
-* Shadcn UI for components
-* Supabase for backend and edge functions
+### Frontend
+- Framework: React 18 with Vite
+- Language: TypeScript
+- Styling: Tailwind CSS
+- Animation: Framer Motion
+- UI Components: Radix UI / Shadcn UI
+- State Management: TanStack Query
 
-## Getting Started
+### Backend and Infrastructure
+- Backend as a Service: Supabase (Auth, Database)
+- Serverless Logic: Supabase Edge Functions (Deno)
+- AI Integration: Gemini 1.5 Pro and Flash
+- Speech Processing: Web Speech API
+- Hosting: Firebase Hosting
 
-1. Clone the Repository
+## Technical Architecture
 
-git clone <YOUR_GIT_URL>
+VoiceBridge is engineered for performance and reliability:
 
-2. Navigate to Project Folder
+1. Speech Capture: The application captures audio input through the browser's SpeechRecognition interface.
+2. Streaming Pipeline: Text is forwarded to a Supabase Edge Function, which interfaces with Gemini AI.
+3. Real-Time Delivery: Translated text is streamed back to the client using Server-Sent Events (SSE), allowing for immediate UI updates.
+4. Audio Output: The final translated string is processed by the SpeechSynthesis interface to provide spoken feedback.
 
-cd voiceBridge
+## Setup and Installation
 
-3. Install Dependencies
+### Prerequisites
+- Node.js (v18 or higher)
+- A Supabase account and project
 
-npm install
+### Steps
 
-4. Run Development Server
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/voice-bridge.git
+   cd voice-bridge
+   ```
 
-npm run dev
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The application will start on the local server.
+3. Configure environment variables:
+   Create a .env file in the root directory:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-## Build for Production
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-npm run build
+## Future Roadmap
 
-The production ready files will be generated in the dist directory.
-
-## Deployment
-
-This project can be deployed on platforms such as Vercel, Netlify, or Railway.
-
-* Build Command: npm run build
-* Output Directory: dist
+- Mobile Application: React Native implementation for native mobile support.
+- Translation History: Persistent storage for past sessions with search capabilities.
+- Advanced Voice Models: Integration with high-fidelity TTS engines like ElevenLabs.
+- API Access: External API endpoints for third-party service integration.
 
 ## License
 
