@@ -6,45 +6,61 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 const CTASection = () => {
   return (
-    <section className="py-24">
-      <div className="container mx-auto px-4">
-        <ScrollReveal>
-          <div className="relative max-w-4xl mx-auto rounded-3xl p-12 md:p-16 text-center overflow-hidden"
-            style={{
-              background: "linear-gradient(135deg, hsl(12 85% 96%), hsl(24 88% 94%), hsl(35 75% 93%))",
-            }}
-          >
-            {/* Warm gradient blobs */}
-            <div className="absolute top-0 left-0 w-64 h-64 rounded-full opacity-30 blur-3xl"
-              style={{ background: "radial-gradient(circle, hsl(12 90% 88%), transparent)" }}
-            />
-            <div className="absolute bottom-0 right-0 w-72 h-72 rounded-full opacity-20 blur-3xl"
-              style={{ background: "radial-gradient(circle, hsl(24 100% 85%), transparent)" }}
-            />
+    <section className="relative w-full py-24 overflow-hidden">
+      {/* Background Glow System */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
 
-            <Badge variant="secondary" className="relative mb-6 px-4 py-1.5 text-sm font-medium bg-white/50 backdrop-blur-sm border-white/30 text-foreground rounded-full">
-              ✨ Trusted By Millions
+      <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+      <div className="absolute bottom-0 right-10 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
+
+      {/* Layout Container */}
+      <div className="relative max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
+        <ScrollReveal>
+          <div className="relative text-center rounded-3xl border border-border/40 bg-background/70 backdrop-blur-xl px-6 py-16 md:py-20 md:px-16 shadow-sm overflow-hidden">
+            {/* Subtle Inner Glow */}
+            <div className="absolute inset-0 opacity-40 bg-gradient-to-tr from-primary/5 via-transparent to-transparent" />
+
+            {/* Badge */}
+            <Badge className="relative mb-6 px-4 py-1.5 text-sm font-medium rounded-full bg-secondary/60 text-foreground border border-border/40">
+              ✨ Trusted by creators & teams
             </Badge>
 
-            <h2 className="relative text-3xl md:text-5xl font-display font-bold text-foreground mb-4 capitalize">
-              Break Every{" "}
-              <span className="gradient-text">
-                Language Barrier
+            {/* Heading */}
+            <h2 className="relative text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+              Break every{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">
+                language barrier
               </span>
             </h2>
-            <p className="relative text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
-              Start Translating Your Meetings In Seconds. No Credit Card Required.
-              With Our User-Friendly Interface.
+
+            {/* Subtext */}
+            <p className="relative mt-5 text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Translate conversations in real time with AI. No setup, no credit
+              card just start speaking and connect globally.
             </p>
-            <Link to="/translate">
-              <Button
-                size="lg"
-                className="relative h-14 px-8 text-base font-semibold shadow-soft gradient-coral text-primary-foreground border-0 hover:opacity-90 rounded-full"
-              >
-                <Mic className="w-5 h-5 mr-2" />
-                Get Started Today
-              </Button>
-            </Link>
+
+            {/* CTA Button */}
+            <div className="relative mt-8 flex justify-center">
+              <Link to="/translate">
+                <Button
+                  size="lg"
+                  className="
+                    h-12 md:h-14 px-8 md:px-10
+                    rounded-full
+                    bg-gradient-to-r from-primary to-primary/80
+                    text-primary-foreground
+                    shadow-xs shadow-primary/20
+                    hover:shadow-xs hover:shadow-primary/30
+                    hover:scale-[1.03]
+                    transition-all duration-300
+                    font-semibold
+                  "
+                >
+                  <Mic className="w-5 h-5 mr-2" />
+                  Start Live Translation
+                </Button>
+              </Link>
+            </div>
           </div>
         </ScrollReveal>
       </div>
