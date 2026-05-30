@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  HiOutlineMenuAlt3, 
-  HiX, 
-  HiOutlineLightningBolt, 
-  HiOutlinePlay, 
-  HiOutlineInformationCircle, 
-  HiOutlineCurrencyDollar,
+import {
+  HiOutlineMenuAlt3,
+  HiX,
   HiOutlineLogin,
-  HiOutlineUserAdd
+  HiOutlineUserAdd,
 } from "react-icons/hi";
+
 import { Button } from "@/components/ui/button";
 import VoiceBridgeLogo from "@/components/VoiceBridgeLogo";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -19,149 +16,284 @@ import { cn } from "@/lib/utils";
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { name: "Features", href: "#features", icon: HiOutlineLightningBolt },
-    { name: "Demo", href: "#demo", icon: HiOutlinePlay },
-    { name: "How It Works", href: "#how-it-works", icon: HiOutlineInformationCircle },
-    { name: "Pricing", href: "/pricing", icon: HiOutlineCurrencyDollar, isRoute: true },
+    {
+      name: "Features",
+      href: "#features",
+      isRoute: false,
+    },
+    {
+      name: "Demo",
+      href: "#demo",
+      isRoute: false,
+    },
+    {
+      name: "How It Works",
+      href: "#how-it-works",
+      isRoute: false,
+    },
+    {
+      name: "Pricing",
+      href: "/pricing",
+      isRoute: true,
+    },
   ];
 
   return (
-    <nav 
+    <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-4 py-4",
-        scrolled ? "py-2" : "py-4"
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        scrolled ? "py-3" : "py-5",
       )}
     >
-      <div 
-        className={cn(
-          "container mx-auto max-w-7xl flex items-center justify-between h-16 px-6 rounded-2xl transition-all duration-300",
-          scrolled 
-            ? "bg-background/70 backdrop-blur-xl border border-border/50 shadow-lg shadow-black/5" 
-            : "bg-transparent"
-        )}
-      >
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="transition-transform duration-300 group-hover:scale-110">
-            <VoiceBridgeLogo size={40} />
-          </div>
-          <span className="font-display font-bold text-2xl tracking-tight text-foreground bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
-            VoiceBridge
-          </span>
-        </Link>
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          className={cn(
+            "h-16 rounded-full border border-border/50",
+            "backdrop-blur-xl transition-all duration-300",
+            "flex items-center justify-between px-5 lg:px-8",
+            scrolled
+              ? "bg-background/80 shadow-lg shadow-black/5"
+              : "bg-background/60",
+          )}
+        >
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 group shrink-0">
+            <div className="transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+              <VoiceBridgeLogo size={38} />
+            </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            link.isRoute ? (
-              <Link
-                key={link.name}
-                to={link.href}
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-xl transition-all duration-200"
-              >
-                <link.icon className="w-4 h-4" />
-                {link.name}
-              </Link>
-            ) : (
-              <a
-                key={link.name}
-                href={link.href}
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-xl transition-all duration-200"
-              >
-                <link.icon className="w-4 h-4" />
-                {link.name}
-              </a>
-            )
-          ))}
-        </div>
-
-        <div className="hidden md:flex items-center gap-3">
-          <ThemeToggle />
-          <div className="h-6 w-[1px] bg-border/50 mx-1" />
-          <Link to="/login">
-            <Button variant="ghost" size="sm" className="rounded-xl px-5 text-sm font-medium">
-              Log In
-            </Button>
+            <span className="hidden sm:block text-xl font-bold tracking-tight">
+              VoiceBridge
+            </span>
           </Link>
-          <Link to="/register">
-            <Button size="sm" className="rounded-xl px-6 bg-primary text-primary-foreground hover:opacity-90 shadow-md shadow-primary/20 transition-all active:scale-95">
-              Get Started
-            </Button>
-          </Link>
-        </div>
 
-        {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
-          <button 
-            className="p-2 text-foreground hover:bg-secondary/50 rounded-xl transition-colors" 
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <HiX className="w-6 h-6" /> : <HiOutlineMenuAlt3 className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-4 right-4 mt-2 p-4 bg-background/95 backdrop-blur-2xl border border-border/50 rounded-2xl shadow-2xl md:hidden flex flex-col gap-2"
-          >
-            {navLinks.map((link) => (
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-10">
+            {navLinks.map((link) =>
               link.isRoute ? (
-                <Link
+                <NavLink
                   key={link.name}
                   to={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all"
+                  className={({ isActive }) =>
+                    cn(
+                      "relative text-sm font-medium transition-colors",
+                      "after:absolute after:left-0 after:-bottom-1",
+                      "after:h-[2px] after:w-0",
+                      "after:bg-primary after:transition-all after:duration-300",
+                      isActive
+                        ? "text-foreground after:w-full"
+                        : "text-muted-foreground hover:text-foreground hover:after:w-full",
+                    )
+                  }
                 >
-                  <link.icon className="w-5 h-5" />
-                  <span className="font-medium">{link.name}</span>
-                </Link>
+                  {link.name}
+                </NavLink>
               ) : (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 p-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all"
+                  className="
+                    relative
+                    text-sm
+                    font-medium
+                    text-muted-foreground
+                    hover:text-foreground
+                    transition-colors
+                    after:absolute
+                    after:left-0
+                    after:-bottom-1
+                    after:h-[2px]
+                    after:w-0
+                    after:bg-primary
+                    after:transition-all
+                    after:duration-300
+                    hover:after:w-full
+                  "
                 >
-                  <link.icon className="w-5 h-5" />
-                  <span className="font-medium">{link.name}</span>
+                  {link.name}
                 </a>
-              )
-            ))}
-            <div className="h-[1px] bg-border/50 my-2" />
-            <Link 
-              to="/login" 
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all"
-            >
-              <HiOutlineLogin className="w-5 h-5" />
-              <span className="font-medium">Log In</span>
-            </Link>
-            <Link to="/register" onClick={() => setMobileOpen(false)}>
-              <Button className="w-full mt-2 rounded-xl h-12 bg-primary text-primary-foreground">
-                <HiOutlineUserAdd className="mr-2 h-5 w-5" />
-                Sign Up Free
+              ),
+            )}
+          </div>
+
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle />
+
+            <div className="h-6 w-px bg-border" />
+
+            <Link to="/login">
+              <Button
+                variant="ghost"
+                className="
+                  rounded-full
+                  px-5
+                  font-medium
+                "
+              >
+                Log In
               </Button>
             </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+            <Link to="/register">
+              <Button
+                className="
+                  rounded-full
+                  px-6
+                  text-white
+                  font-medium
+                  bg-gradient-to-r
+                  from-primary
+                  to-primary/80
+                  hover:scale-105
+                  hover:shadow-lg
+                  hover:shadow-primary/20
+                  transition-all
+                  duration-300
+                "
+              >
+                Get Started
+              </Button>
+            </Link>
+          </div>
+
+          {/* Mobile Actions */}
+          <div className="lg:hidden flex items-center gap-2">
+            <ThemeToggle />
+
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="
+                p-2.5
+                rounded-full
+                border
+                border-border/50
+                bg-background/60
+                hover:bg-secondary/60
+                transition-colors
+              "
+            >
+              {mobileOpen ? (
+                <HiX className="w-5 h-5" />
+              ) : (
+                <HiOutlineMenuAlt3 className="w-5 h-5" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2 }}
+              className="
+                lg:hidden
+                mt-3
+                rounded-3xl
+                border
+                border-border/50
+                bg-background/95
+                backdrop-blur-2xl
+                shadow-xl
+                overflow-hidden
+              "
+            >
+              <div className="p-3">
+                {navLinks.map((link) =>
+                  link.isRoute ? (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="
+                        flex
+                        items-center
+                        px-4
+                        py-3
+                        rounded-2xl
+                        text-sm
+                        font-medium
+                        text-muted-foreground
+                        hover:text-foreground
+                        hover:bg-secondary/50
+                        transition-all
+                      "
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="
+                        flex
+                        items-center
+                        px-4
+                        py-3
+                        rounded-2xl
+                        text-sm
+                        font-medium
+                        text-muted-foreground
+                        hover:text-foreground
+                        hover:bg-secondary/50
+                        transition-all
+                      "
+                    >
+                      {link.name}
+                    </a>
+                  ),
+                )}
+
+                <div className="h-px bg-border my-3" />
+
+                <Link to="/login" onClick={() => setMobileOpen(false)}>
+                  <Button
+                    variant="outline"
+                    className="w-full rounded-2xl h-11 mb-2"
+                  >
+                    <HiOutlineLogin className="mr-2 h-4 w-4" />
+                    Log In
+                  </Button>
+                </Link>
+
+                <Link to="/register" onClick={() => setMobileOpen(false)}>
+                  <Button
+                    className="
+                      w-full
+                      h-11
+                      rounded-2xl
+                      text-white
+                      bg-gradient-to-r
+                      from-primary
+                      to-primary/80
+                    "
+                  >
+                    <HiOutlineUserAdd className="mr-2 h-4 w-4" />
+                    Get Started Free
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </nav>
   );
 };
