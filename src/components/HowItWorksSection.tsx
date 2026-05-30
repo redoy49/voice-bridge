@@ -6,60 +6,95 @@ const steps = [
     icon: Mic,
     step: "01",
     title: "Speak Naturally",
-    description: "Just talk in your language. VoiceBridge auto-detects the source language and speaker identity.",
+    description:
+      "Just talk in your language. VoiceBridge automatically detects speech and speaker identity.",
   },
   {
     icon: Cpu,
     step: "02",
-    title: "AI Translates In Real-Time",
-    description: "Streaming AI processes audio in small chunks, translating incrementally with predictive context.",
+    title: "AI Translates in Real Time",
+    description:
+      "Streaming AI processes audio in chunks, translating with contextual understanding.",
   },
   {
     icon: Volume2,
     step: "03",
     title: "Everyone Understands",
-    description: "Each listener hears a natural voice translation in their preferred language — instantly.",
+    description:
+      "Each participant hears natural translation in their preferred language instantly.",
   },
 ];
 
 const HowItWorksSection = () => {
   return (
-    <section id="how-it-works" className="py-24">
-      <div className="container mx-auto px-4">
+    <section id="how-it-works" className="relative py-24 bg-background">
+      {/* subtle background glow */}
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 via-transparent to-transparent pointer-events-none" />
+
+      <div className="relative max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <ScrollReveal className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-display font-bold text-foreground mb-4 capitalize">
+          <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
             How It Works
           </h2>
-          <p className="text-muted-foreground text-lg">Three Steps. Zero Setup.</p>
+
+          <p className="text-muted-foreground text-lg">
+            Three simple steps. Zero setup required.
+          </p>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {steps.map((s, i) => (
-            <ScrollReveal key={s.step} delay={i * 0.15}>
-              <div className="relative text-center">
-                <div className="relative mx-auto mb-6 w-16 h-16">
-                  {/* Glass circle behind icon */}
-                  <div className="absolute inset-0 rounded-2xl bg-primary/10 backdrop-blur-sm border border-primary/15" />
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <s.icon className="w-7 h-7 text-primary" />
-                  </div>
-                </div>
-                <span className="text-xs font-display font-semibold text-primary/70 tracking-widest mb-2 block">
-                  STEP {s.step}
-                </span>
-                <h3 className="font-display font-semibold text-xl text-foreground mb-3 capitalize">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">{s.description}</p>
+        {/* Steps */}
+        <div className="grid gap-10 md:grid-cols-3 relative">
+          {steps.map((s, i) => {
+            const Icon = s.icon;
 
-                {i < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-8 -right-4 w-8 text-border">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
+            return (
+              <ScrollReveal key={s.step} delay={i * 0.1}>
+                <div className="relative text-center group">
+                  {/* Icon */}
+                  <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-border/40 bg-card/40 backdrop-blur-md transition-all duration-300 group-hover:-translate-y-1 group-hover:border-border">
+                    <Icon className="h-7 w-7 text-primary" />
                   </div>
-                )}
-              </div>
-            </ScrollReveal>
-          ))}
+
+                  {/* Step badge */}
+                  <span className="mb-2 block text-xs font-semibold tracking-widest text-primary/70">
+                    STEP {s.step}
+                  </span>
+
+                  {/* Title */}
+                  <h3 className="mb-3 text-xl font-semibold text-foreground">
+                    {s.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="mx-auto max-w-xs text-sm leading-relaxed text-muted-foreground">
+                    {s.description}
+                  </p>
+
+                  {/* Connector line (desktop only) */}
+                  {i < steps.length - 1 && (
+                    <div className="absolute top-8 -right-6 hidden md:block text-border/60">
+                      <svg
+                        width="32"
+                        height="16"
+                        viewBox="0 0 32 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 8 H28 M28 8 L22 2 M28 8 L22 14"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>
