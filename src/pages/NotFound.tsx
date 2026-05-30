@@ -9,7 +9,10 @@ const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+    console.error(
+      "404 Error: User attempted to access non-existent route:",
+      location.pathname,
+    );
   }, [location.pathname]);
 
   return (
@@ -19,9 +22,14 @@ const NotFound = () => {
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[100px] pointer-events-none" />
 
       {/* Top nav logo */}
-      <Link to="/" className="absolute top-6 left-6 flex items-center gap-2 z-10">
+      <Link
+        to="/"
+        className="absolute top-6 left-6 flex items-center gap-2 z-10"
+      >
         <VoiceBridgeLogo size={36} />
-        <span className="font-display font-bold text-xl text-foreground">VoiceBridge</span>
+        <span className="font-display font-bold text-xl text-foreground">
+          VoiceBridge
+        </span>
       </Link>
 
       <motion.div
@@ -45,12 +53,16 @@ const NotFound = () => {
           Lost In Translation
         </h1>
         <p className="text-muted-foreground text-lg mb-8 max-w-md mx-auto">
-          The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+          The page you're looking for doesn't exist or has been moved. Let's get
+          you back on track.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link to="/">
-            <Button size="lg" className="gradient-coral text-primary-foreground border-0 rounded-full h-12 px-8 font-semibold shadow-glow hover:opacity-90">
+            <Button
+              size="lg"
+              className="gradient-coral text-primary-foreground border-0 rounded-full h-12 px-8 font-semibold shadow-glow hover:opacity-90"
+            >
               <Home className="w-4 h-4 mr-2" />
               Back To Home
             </Button>

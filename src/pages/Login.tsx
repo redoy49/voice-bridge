@@ -32,7 +32,7 @@ const Login = () => {
         to="/"
         className="absolute top-6 left-6 flex items-center gap-2 z-10"
       >
-        <VoiceBridgeLogo size={36} />
+        <VoiceBridgeLogo size={36} className="rounded-full" />
         <span className="font-display font-bold text-xl text-foreground">
           VoiceBridge
         </span>
