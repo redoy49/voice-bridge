@@ -71,7 +71,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group shrink-0">
             <div className="transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-              <VoiceBridgeLogo size={38} />
+              <VoiceBridgeLogo size={40} className="rounded-full" />
             </div>
 
             <span className="hidden sm:block text-xl font-bold tracking-tight">
