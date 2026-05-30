@@ -5,64 +5,101 @@ const features = [
   {
     icon: Zap,
     title: "Ultra-Low Latency",
-    description: "Start translating while the speaker is still talking. Predictive translation anticipates sentence endings.",
+    description:
+      "Start translating while the speaker is still talking. Predictive AI reduces delay to near real-time.",
   },
   {
     icon: Globe,
     title: "60+ Languages",
-    description: "Support for dozens of global languages with automatic detection. Handles code-switching mid-sentence.",
+    description:
+      "Automatic language detection with seamless switching even mid-sentence.",
   },
   {
     icon: Users,
-    title: "Speaker Diarization",
-    description: "Automatically identifies who said what with persistent voice fingerprints for returning speakers.",
+    title: "Speaker Identification",
+    description:
+      "Recognizes and separates speakers with consistent voice fingerprints.",
   },
   {
     icon: Brain,
     title: "Context-Aware AI",
-    description: "Preserves tone, emotion, and intent. Natural conversational flow over literal translation.",
+    description:
+      "Preserves meaning, tone, and intent instead of literal word translation.",
   },
   {
     icon: Headphones,
-    title: "Silent Mode",
-    description: "Hear translations privately without other participants needing to install anything.",
+    title: "Private Listening Mode",
+    description:
+      "Receive translations privately without interrupting live conversations.",
   },
   {
     icon: Shield,
-    title: "Enterprise Secure",
-    description: "End-to-end encryption. SOC 2 compliant. Your conversations never leave the secure pipeline.",
+    title: "Enterprise Security",
+    description:
+      "End-to-end encryption with secure processing and compliance standards.",
   },
 ];
 
 const FeaturesSection = () => {
   return (
-    <section id="features" className="py-24 bg-secondary/30">
-      <div className="container mx-auto px-4">
+    <section id="features" className="relative py-24 bg-background">
+      {/* subtle background glow */}
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary/30 via-transparent to-transparent pointer-events-none" />
+
+      <div className="relative max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
         <ScrollReveal className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-display font-bold text-foreground mb-4 capitalize">
-            Built For Speed. Designed For Humans.
+          <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
+            Built for Speed. Designed for Humans.
           </h2>
+
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Every Feature Engineered To Make Language Barriers Disappear Instantly.
+            Every feature is engineered to remove language barriers in real time,
+            without breaking natural conversation flow.
           </p>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {features.map((feature, i) => (
-            <ScrollReveal key={feature.title} delay={i * 0.08}>
-              <div className="relative bg-card/30 backdrop-blur-md rounded-2xl p-7 border border-white/20 hover:shadow-soft transition-all duration-300 group overflow-hidden">
-                {/* Glass gradient overlay */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
-                <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                    <feature.icon className="w-6 h-6 text-primary" />
+        {/* Grid */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature, i) => {
+            const Icon = feature.icon;
+
+            return (
+              <ScrollReveal key={feature.title} delay={i * 0.06}>
+                <div
+                  className="
+                    group relative rounded-2xl
+                    border border-border/40
+                    bg-card/40 backdrop-blur-md
+                    p-7
+                    transition-all duration-300
+                    hover:-translate-y-1
+                    hover:border-border
+                    hover:shadow-lg
+                  "
+                >
+                  {/* icon container */}
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="font-display font-semibold text-lg text-foreground mb-2 capitalize">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+
+                  {/* title */}
+                  <h3 className="mb-2 text-lg font-semibold text-foreground">
+                    {feature.title}
+                  </h3>
+
+                  {/* description */}
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {feature.description}
+                  </p>
+
+                  {/* subtle hover glow */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
                 </div>
-              </div>
-            </ScrollReveal>
-          ))}
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>
